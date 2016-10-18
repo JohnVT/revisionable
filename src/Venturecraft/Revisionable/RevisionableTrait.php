@@ -267,7 +267,9 @@ trait RevisionableTrait
     public function getSystemUserId()
     {
         try {
-            if (class_exists($class = '\SleepingOwl\AdminAuth\Facades\AdminAuth')
+            if (isset($this->updatedData['updated_by'])) {
+                return $this->updatedData['updated_by'];
+            } elseif (class_exists($class = '\SleepingOwl\AdminAuth\Facades\AdminAuth')
                 || class_exists($class = '\Cartalyst\Sentry\Facades\Laravel\Sentry')
                 || class_exists($class = '\Cartalyst\Sentinel\Laravel\Facades\Sentinel')
             ) {
